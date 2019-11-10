@@ -2,7 +2,7 @@
 App is about statistics for player of League of Legends using riot api. Node.js &amp; React <br>
 The app use Redux beginning, and then adjust to Graphql - Apollo 
 
-<h2>***How to start: <h2>
+<h2>***How to start: <h2> <br>
 -Server side: <br>
 1. cd /nodejs <br>
 2. npm install <br>
