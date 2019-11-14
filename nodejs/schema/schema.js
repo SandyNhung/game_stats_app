@@ -2,9 +2,12 @@ import {
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
-    GraphQLSchema
+    GraphQLSchema,
+    GraphQLNonNull,
+    GraphQLInt
 } from 'graphql';
 import champion from './type/champion';
+import livematch from './type/liveMatch';
 import axios from 'axios';
 import { riotApiKey } from '../config';
 
@@ -13,7 +16,26 @@ const summonerName = new GraphQLObjectType({
     name: 'SummonerName',
     fields: () => ({
         name: { type: GraphQLString },
-        accountId: { type: GraphQLString }
+        accountId: { type: GraphQLString },
+        id: { type: GraphQLString },
+        puuid: { type: GraphQLString },
+        region: { type: GraphQLString },
+        liveMatch: {
+            type: livematch,
+            args: {
+                summonerId: { type: GraphQLInt },
+                region: { type: GraphQLString }
+            },
+            resolve: (root, args) =>
+                axios
+                    .get(
+                        `https://${args.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${args.id}?api_key=${riotApiKey}`
+                    )
+                    .then(res => {
+                        console.log(res.data);
+                        return res.data;
+                    })
+        }
     })
 });
 const regionData = [
@@ -46,7 +68,7 @@ const queryType = new GraphQLObjectType({
                         `https://${args.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${args.name}?api_key=${riotApiKey}`
                     )
                     .then(res => {
-                        console.log(res.data);
+                        res.data.region = args.region;
                         return res.data;
                     })
         },

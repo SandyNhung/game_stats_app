@@ -1,9 +1,12 @@
-export default (state= '', action) => {
+
+
+
+export default (state= {}, action) => {
     switch(action.type){
         default:
             return state
 
-        case 'ERROR':
+        case 'LOG_IN':
             return action.payload
     }
 } 
