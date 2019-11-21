@@ -1,1 +1,1 @@
-export const riotApiKey = 'RGAPI-xxxxxx';
+export const riotApiKey = 'RGAPI-xxxxxx'
