@@ -1,0 +1,11 @@
+.chart-strength {
+  max-height: 60vh;
+}
+
+.left-side {
+  border-right: 1px #d5d5d6 solid;
+}
+
+.right-side {
+  border-left: 1px #d5d5d6 solid;
+}
