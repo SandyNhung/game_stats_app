@@ -9,3 +9,7 @@
 .right-side {
   border-left: 1px #d5d5d6 solid;
 }
+
+h3.title.is-5 {
+  margin: 0;
+}

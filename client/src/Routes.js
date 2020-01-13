@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Routes.css'
 import { Link, Router, Switch, Route } from 'react-router-dom'
 import LiveGame from './components/LiveGame'
@@ -9,6 +9,26 @@ import ListChampions from './components/ListChampions'
 import history from './history'
 
 function NavBar() {
+  const routesContainer = () => {
+    if (localStorage.getItem('summonerId')) {
+      return (
+        <React.Fragment>
+          <Link to="/live-game" className="navbar-item">
+            Live Game
+          </Link>
+          <Link to="/match-history" className="navbar-item">
+            Match History
+          </Link>
+          <Link to="/champions" className="navbar-item">
+            Champions
+          </Link>
+        </React.Fragment>
+      )
+    }
+  }
+  useEffect(() => {
+    routesContainer()
+  }, routesContainer)
   return (
     <Router history={history}>
       <div className="hero is-fullheight">
@@ -22,15 +42,7 @@ function NavBar() {
                 <Link to="/" className="navbar-item">
                   LogIn
                 </Link>
-                <Link to="/live-game" className="navbar-item">
-                  Live Game
-                </Link>
-                <Link to="/match-history" className="navbar-item">
-                  Match History
-                </Link>
-                <Link to="/champions" className="navbar-item">
-                  Champions
-                </Link>
+                {routesContainer()}
               </div>
             </div>
           </nav>
